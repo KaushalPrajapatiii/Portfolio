@@ -14,7 +14,7 @@ I’m Kaushal Prajapati, an enthusiastic Information Technology student passiona
 [Click Here to Visit](https://KaushalPrajapatiii.github.io/Portfolio/)
 
 ## 📫 Contact Me
-- Email: adwaitbhargav@gmail.com
+- Email: kaushalprajapatiii18@gmail.com
 - Phone: 7705958167
 - Location: Lucknow, Uttar Pradesh
 - [Instagram](https://instagram.com/the.luciifer_) | [GitHub](https://github.com/KaushalPrajapatiii) | [LinkedIn](https://www.linkedin.com/in/kaushalprajapatiii18)
