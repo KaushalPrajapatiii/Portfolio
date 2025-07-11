@@ -80,6 +80,7 @@ html {
     background: linear-gradient(135deg, rgba(0, 123, 255, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
     position: relative;
     overflow: hidden;
+    padding-top: 100px;
 }
 
 .hero-section::before {
@@ -440,6 +441,7 @@ footer {
 @media (max-width: 768px) {
     .hero-section {
         text-align: center;
+        padding-top: 120px;
     }
     
     .hero-content {
