@@ -199,3 +199,99 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Enhanced Typing Animation
+function initTypingAnimation() {
+    const typingElement = document.getElementById('typingText');
+    const phrases = [
+        'Information Technology Student',
+        'Web Developer',
+        'AI Enthusiast',
+        'Future Tech Leader'
+    ];
+    
+    let currentPhrase = 0;
+    let currentChar = 0;
+    let isDeleting = false;
+    
+    function typeAnimation() {
+        const current = phrases[currentPhrase];
+        
+        if (isDeleting) {
+            typingElement.textContent = current.substring(0, currentChar - 1);
+            currentChar--;
+        } else {
+            typingElement.textContent = current.substring(0, currentChar + 1);
+            currentChar++;
+        }
+        
+        let typeSpeed = isDeleting ? 50 : 100;
+        
+        if (!isDeleting && currentChar === current.length) {
+            typeSpeed = 2000; // Pause at end
+            isDeleting = true;
+        } else if (isDeleting && currentChar === 0) {
+            isDeleting = false;
+            currentPhrase = (currentPhrase + 1) % phrases.length;
+            typeSpeed = 500; // Pause before next phrase
+        }
+        
+        setTimeout(typeAnimation, typeSpeed);
+    }
+    
+    typeAnimation();
+}
+
+// Initialize typing animation when page loads
+window.addEventListener('load', function() {
+    initTypingAnimation();
+});
+
+// Contact Form Functionality
+const contactForm = document.getElementById('contactForm');
+const formStatus = document.getElementById('formStatus');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(contactForm);
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        const originalText = submitButton.innerHTML;
+        
+        // Show loading state
+        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
+        submitButton.disabled = true;
+        
+        try {
+            const response = await fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                formStatus.innerHTML = '<i class="fas fa-check-circle me-2"></i>Thank you! Your message has been sent successfully.';
+                formStatus.className = 'success';
+                contactForm.reset();
+            } else {
+                throw new Error('Form submission failed');
+            }
+        } catch (error) {
+            formStatus.innerHTML = '<i class="fas fa-exclamation-circle me-2"></i>Sorry, there was an error sending your message. Please try again or contact me directly.';
+            formStatus.className = 'error';
+        }
+        
+        // Reset button
+        submitButton.innerHTML = originalText;
+        submitButton.disabled = false;
+        
+        // Hide status after 5 seconds
+        setTimeout(() => {
+            formStatus.innerHTML = '';
+            formStatus.className = '';
+        }, 5000);
+    });
+}
